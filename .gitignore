@@ -1,0 +1,10 @@
+# Ignore all files that aren't C source code or README.md or man page
+
+*
+!.gitignore
+!README.md
+!*.c
+!*.h
+man_3_printf
+?-main.c
+_putchar.c
