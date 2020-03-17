@@ -1,8 +1,10 @@
 #include "holberton.h"
 
 /**
- * get_specifier - 
- * Return:
+ * get_specifier - points to the correct function for print
+ * @arg: parameters list
+ * @arg; struct array of function according to specifiers
+ * Return: number of charactes printed
  */
 
 int get_specifier(va_list arg, sp_t sps[], const char *format)
