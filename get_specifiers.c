@@ -2,6 +2,8 @@
 
 /**
  * get_specifier - points to the correct function for print
+ *@format: type of format
+ *@sps: array
  * @arg: parameters list
  * @arg; struct array of function according to specifiers
  * Return: number of charactes printed

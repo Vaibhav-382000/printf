@@ -1,25 +1,28 @@
 #ifndef HOLBERTON_H
 #define HOLBERTON_H
 
-#include <unistd.h>
+
 #include <stdio.h>
-#include <stdlib.h>
 #include <stdarg.h>
+#include <stdlib.h>
+#include <unistd.h>
+
 
 /* Macros */
 #define _BUFFER_ 1024
 
 /**
- * struct specifiers - struct for specifiers converters
- * @sp: specifier
- * @f: corresponding function
+ *struct specifiers - name of printf
+ *@sp: pointer
+ *@f: pointer to the function
+ *sp_t - is the alias
  */
+
 typedef struct specifiers
 {
 	char sp;
 	/*int (*f)(va_list arg, char * buffer, int count);*/
 	int (*f)(va_list arg);
-
 } sp_t;
 
 /**
@@ -56,6 +59,7 @@ int _printf(const char *format, ...);
  *int sp_a(va_list arg, char * buffer, int count);
  *int sp_pc(va_list arg, char * buffer, int count);
  */
+
 int sp_c(va_list arg);
 int sp_s(va_list arg);
 int sp_d(va_list arg);
