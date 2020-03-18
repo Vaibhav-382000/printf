@@ -1,163 +1,67 @@
-.\"Modified from man(1) of FreeBSd, the NetBSD mdoc.template, and mdoc.samples.
-.\"See Also:
-.\"man mdoc.samples for a complete listing of options
-.\"man mdoc for the short list of editing options
-.\"/usr/share/misc/mdoc.template
-.Dd 8/4/10               \" DATE
-.Dt Printf 1  \" Program name andmanual section number
-.Os Darwin
-.Sh NAME                 \" Section Header - required - don't modify
-.Nm Printf,
-.\" The following lines are read in generating the apropos(man -k) database. Use only key
-.\" words here as the database is built based on the words here and in the .ND line.
-.Nm printf, fprintf, sprintf, snprintf, vprintf, vfprintf, vsprintf, vsnprintf - formatted output conversion
+.TH _PRINTF 3  "16 March 2020" "0.1" "_printf user manual"
 
-.Nm 
-.\" Use .Nm macro to designate other names for the documented program.
-.Nd 
-.Sh SYNOPSIS             \" Section Header - required - don't modify
-.Nm
+.SH NAME
+.br
+.B _printf
+- prints the arguments according to format
 
-.Ope              #include <stdio.h>
+.SH SYNOPSIS
+.br
+.B _printf
+\fI\,FORMAT \/\fR[\fI\,ARGUMENT\/\fR]...
 
-     int printf(const char * restrict format, ...);
+.B int printf(const char *\fIformat\fB, ...);
+.br
 
-     
-]
-.Op Ar                   \" [file ...]
-.               \" Underlined argument - use .Ar anywhere to underline
+.SH DESCRIPTION
+The \fB_printf()\fR function send formatted output to the standard output (stdout). The format is constant character string that contains the text to be written to stdout. It can optionally contain embedded \fIformat specifiers\fR that are replaced by the values given in subsequent additional arguments and formatted as requested.
 
-.Sh DESCRIPTION          \" Section Header - required - don't modify
-The printf function and its respective family gives results with the format described lines below. Among the functions line below.
-Printf() and vprintf output to stdout.
-.Nm
-     The format string is composed of zero or more directives: ordinary char-
-     acters (not %), which are copied unchanged to the output stream; and con-
-     version specifications, each of which results in fetching zero or more
-     subsequent arguments.  Each conversion specification is introduced by the
-     % character.  The arguments must correspond properly (after type promo-
-     tion) with the conversion specifier.  After the %, the following appear
-     in sequence:
-:
-.Ar underlined text .
-.Pp                      \" Inserts a space
-A list of items with descriptions:
-.Bl -tag -width -indent  \" Begins a tagged list
-               \" Each item preceded by .It macro
-.El                      \" Ends the list
-.Pp
-A list of flags and their descriptions:
-.Bl -tag -width -indent  \" Differs from above in tag removed
-.It Fl `#'                \"-a flag as a list item
-The value should be converted to an ``alternate form''.
-                      For c, d, i, n, p, s, and u conversions, this option has
-                      no effect.  For o conversions, the precision of the num-
-                      ber is increased to force the first character of the
-                      output string to a zero.
-.It Fl `0' (zero)
-Zero padding.  For all conversions except n, the con-
-                      verted value is padded on the left with zeros rather
-                      than blanks.
-.It Fl `-' 
-A negative field width flag; the converted value is to
-                      be left adjusted on the field boundary.
-.It Fl ` ' (space)
-A blank should be left before a positive number produced
-                      by a signed conversion (a, A, d, e, E, f, F, g, G, or
-                      i).
-.It  `+' 
-A sign must always be placed before a number produced by
-                      a signed conversion.
-.It `''
-Decimal conversions
+.SH  SPECIFIERS
+The specifiers are preceded by a percentage symbol (%):
+.TP
+.BR %c
+If a format is of type character prints the character.
+.TP
+.BR %s
+Prints a string of characters.
+.TP
+.B %d, %i
+Prints the argument in decimal or integer format. 
+.TP
+.BR %u
+Prints the argument in unsigned integer format.
+.TP
+.BR %b
+Prints the character(s) in binary format.
+.TP
+.BR %r
+Print the string in reverse order.
+.TP
+.BR %R
+Rot13 is a letter substition, it replaces a letter with the 13th letter after it, in the alphabet.
 
-.El                      \" Ends the list
-.Pp
-.\" .Sh ENVIRONMENT      \" May not be needed
-.\" .Bl -tag -width "ENV_VAR_1" -indent \" ENV_VAR_1 is width of the string ENV_VAR_1
-.\" .It Ev ENV_VAR_1
-.\" Description of ENV_VAR_1
-.\" .It Ev ENV_VAR_2
-.\" Description of ENV_VAR_2
-.\" .El
-.Sh Examples                \" File used or created by the topic of the man page
-.Bl -tag -width "/Users/joeuser/Library/really_long_file_name" -compact
-.It 
-.Ope #include "holberton.h"
-/**
- * get_specifier - points to the correct function for print
- * @arg: parameters list
- * @arg; struct array of function according to specifiers
- * Return: number of charactes printed
- */
+.SH EXAMPLES
+To  print a string:  
 
-int get_specifier(va_list arg, sp_t sps[], const char *format)
-{
-	int i, j, fun, count = 0;
+        #include "Holberton.h"
+        char string = "World";
+        _printf("Hello %s", string)
+        Output: Hello World 
+        
+      To print an integer:
 
-	for (i = 0; format[i]; i++)
-	{
-		if (format[i] == '%')
-		   {
-				for (j = 0; sps[j].sp; j++)
-				       {
-							if (format[i + 1] == sps[j].sp)
-							   	       {
-												fun = sps[j].f(arg);
-														if (fun == -1)
-														   	     return (-1);
-															     	       count += fun;
-																       	     	  break;
-																		     }
-																		       }
-																		         if (format[i + 1] != ' ' && !(sps[j].sp))
-																			    	      {
-																				         if (format[i + 1])
-																					    	      	{
-																							    write(1, &format[i], 1);
-																							    	     		   write(1, &format[i + 1], 1);
-																										   	    	      	    count += 2;
-																													    	      }
-																														         else
-																															     return (-1);
-																															     	     }
-																																       i++;
-																																        }
-																																	 else
-																																	  {
-																																	    write(1, &format[i], 1);
-																																	    	     		 count++;
-																																				  }
-																																				  }
-																																				  return (count);
-}
+        #include "Holberton.h"
+        _printf("It is %d", time);
 
-]
+.SH RETURN VALUE
+If successful, this function returns the number of characters printed (excluding the null byte used to end output to strings), If an error is encountered returns -1.
+.in
+.br
 
-.El                      \" Ends the list
-.\" .Sh DIAGNOSTICS       \" May not be needed
-.\" .Bl -diag
-.\" .It Diagnostic Tag
-.\" Diagnostic informtion here.
-.\" .It Diagnostic Tag
-.\" Diagnostic informtion here.
-.\" .El
-.Sh Error
-.Bl
-.It
-Core Dump (Segmentation fault): Core Dump/Segmentation fault is a specific kind of error caused by accessing memory that “does not belong to you.”
-
-When a piece of code tries to do read and write operation in a read only location in memory or freed block of memory, it is known as core dump.
-It is an error indicating memory corruption.
-
-.Sh SEE ALSO
-.\" List links in ascending order by section, alphabetically within a section.
-.\" Please do not reference files that do not exist without filing a bug report
-.Xr Printf 1 ,
-.Xr printf_l 3 ,
-.EL
-.EL
+.SH SEE ALSO
+printf(3), printf(1)
+.br
 
 .SH AUTHOR
-Juan Daniel Lopez Garcia and Manuel torres
+Juan Daniel Lopez Garcia and Manuel Torres
 
