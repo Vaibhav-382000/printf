@@ -88,30 +88,27 @@ int sp_i(va_list arg)
  */
 int sp_b(va_list arg)
 {
-	unsigned int bin[32];
+	unsigned int bin[sizeof(unsigned int) * 8 + 1];
 	int i = 0;
 	unsigned int n = 0, k = 0, b;
 
 	n = va_arg(arg, unsigned int);
-	if (n < 2)
+
+	if (n == 0)
+		return (write(1, &n, 1));
+
+	
+	while (n > 0)
 	{
-		write(1, &n, 1);
-		k++;
+		bin[i] = n % 2;
+		n = n / 2;
+		i++;
 	}
-	else
+	for (i = i - 1; i >= 0; i--)
 	{
-		while (n > 0)
-		{
-			bin[i] = n % 2;
-			n = n / 2;
-			i++;
-		}
-		for (i = i - 1; i >= 0; i--)
-		{
-			b = bin[i] + '0';
-			write(1, &b, 1);
-			k++;
-		}
+		b = bin[i] + '0';
+		write(1, &b, 1);
+		k++;
 	}
 	return (k);
 }
