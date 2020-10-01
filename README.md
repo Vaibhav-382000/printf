@@ -1,10 +1,11 @@
 ![Holberton school logo](https://secure.meetupstatic.com/photos/event/b/c/5/6/highres_475548214.jpeg)
-# 0x11. C - printf
+# C - printf
 
 
 This repository contains the files for Holberton's **How create a printf**. It can be compiled using GCC and will produce an expected output given certain parameters.
 
 # Introduction
+
 Before you can create a printf, you must first consider that it makes the function printf. The printf is language function to do formatted printing
 
 # Pre-requisites
@@ -23,29 +24,27 @@ Before you can create a printf, you must first consider that it makes the functi
 #### Data structure for this project:
 ```
 
-
-### Used headers:
-
 The C Standard Library is a set of C built-in functions, constants and header files like ```<stdio.h>```, ```<stdlib.h>```, ```<math.h>```, etc. This library will work as a reference manual for C programmers.
 
 For this program I have used:
 
 
-- ##### #include <stdlib.h>
+- #include <stdlib.h>
 
-- ##### #include <string.h>
+- #include <string.h>
 
-- ##### #include <stdio.h>
+- #include <stdio.h>
 
-- ##### #include <stdarg.h>
-- ##### #include <unistd.h>
+- #include <stdarg.h>
 
-
-
+- #include <unistd.h>
 
 
 
-### GCC command to compile:
+
+
+
+GCC command to compile:
 ```
 gcc -Wall -Wextra -Werror -pedantic -Wno-format *.c
 
@@ -99,8 +98,6 @@ int main(void)
     printf("Unknown:[%r]\n");
     return (0);
 }
-alex@ubuntu:~/c/printf$ gcc -Wall -Wextra -Werror -pedantic -Wno-format *.c
-alex@ubuntu:~/c/printf$ ./printf
 Let's try to printf a simple sentence.
 Let's try to printf a simple sentence.
 Length:[39, 39]
@@ -128,9 +125,8 @@ Unknown:[%r]
 alex@ubuntu:~/c/printf$
 ```
 
+Contact Info:
+Git: <a href="https://github.com/matcls" target="_blank">Manuel Torres</a>
 
-### Contact Info:
-#### Git: <a href="https://github.com/matcls" target="_blank">Manuel Torres</a>
-
-#### Git: <a href="https://github.com/danielj32" target="_blank">Juan Daniel Lopez</a>
+Git: <a href="https://github.com/danielj32" target="_blank">Juan Daniel Lopez</a>
 
